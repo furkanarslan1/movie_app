@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { PiFilmSlateFill } from "react-icons/pi";
 import { NavLink, Link } from "react-router";
+import { BiSolidCategory } from "react-icons/bi";
+import { useDispatch, useSelector } from "react-redux";
+import { getGenre } from "../redux/slices/genreSlice";
 
 export default function Navbar() {
+  const { genreList } = useSelector((store) => store.genres);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getGenre());
+  }, []);
   return (
     <div className="px-6 py-5 bg-black text-white flex items-center justify-between ">
       <div className="flex items-center hover:cursor-pointer gap-12 ">
@@ -25,6 +33,27 @@ export default function Navbar() {
       </div>
 
       <div className="flex items-center gap-12  ">
+        <div className="hidden md:block relative group">
+          <div className="flex items-center gap-2 hover:cursor-pointer">
+            <BiSolidCategory className="text-2xl" />
+            <Link to="/genre" className="text-md">
+              Categories
+            </Link>
+          </div>
+          <div className="absolute top-full lef-0  hidden group-hover:block  bg-black p-4 rounded-lg w-[200px]   ">
+            <ul className=" flex flex-col  gap-2  py-4 px-2 ">
+              {genreList &&
+                genreList.map((genre) => (
+                  <Link
+                    to={`categories/${genre.id}`}
+                    className="hover:cursor-pointer hover:text-red-600  transition duration-300"
+                  >
+                    {genre.name}
+                  </Link>
+                ))}
+            </ul>
+          </div>
+        </div>
         <Link
           to="/watch-list"
           className="font-extrabold hover:cursor-pointer hover:bg-red-600 p-2 rounded-2xl  transition duration-500 hidden md:block"
