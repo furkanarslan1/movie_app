@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+}
+
+.active {
+  background-color: red;
+  padding: 8px;
+  border-radius: 5px;
+  box-shadow: rgba(255, 255, 255, 0.45) 0px 54px 55px,
+    rgba(255, 255, 255, 0.12) 0px -12px 30px,
+    rgba(252, 251, 251, 0.12) 0px 4px 6px,
+    rgba(245, 245, 245, 0.17) 0px 12px 13px,
+    rgba(242, 241, 241, 0.09) 0px -3px 5px;
+}
