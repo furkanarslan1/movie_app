@@ -40,13 +40,14 @@ export default function Navbar() {
               Categories
             </Link>
           </div>
-          <div className="absolute top-full lef-0  hidden group-hover:block  bg-black p-4 rounded-lg w-[200px]   ">
+          <div className="absolute top-full lef-0  hidden group-hover:block  bg-black p-4 rounded-lg w-[200px]  z-20  ">
             <ul className=" flex flex-col  gap-2  py-4 px-2 ">
               {genreList &&
                 genreList.map((genre) => (
                   <Link
                     to={`categories/${genre.id}`}
                     className="hover:cursor-pointer hover:text-red-600  transition duration-300"
+                    key={genre.id}
                   >
                     {genre.name}
                   </Link>
