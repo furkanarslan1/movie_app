@@ -36,7 +36,7 @@ export default function Navbar() {
         <div className="hidden md:block relative group">
           <div className="flex items-center gap-2 hover:cursor-pointer">
             <BiSolidCategory className="text-2xl" />
-            <Link to="/genre" className="text-md">
+            <Link to="/categories" className="text-md">
               Categories
             </Link>
           </div>

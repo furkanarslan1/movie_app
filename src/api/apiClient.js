@@ -7,12 +7,14 @@ export const API_GENRE = "genre/movie/list";
 axios.defaults.baseURL = "https://api.themoviedb.org/3/";
 axios.defaults.headers.common["Authorization"] = `Bearer ${API_KEY}`; //  API key’i URL’ye eklemek yerine header’a ekleme
 const methods = {
-  get: (url) => axios.get(url).then((response) => response.data.genres),
+  get: (url) => axios.get(url).then((response) => response.data),
 };
 
 const genres = {
   //   list: () => methods.get(`${API_GENRE}?api_key=${API_KEY}`),
   list: () => methods.get(API_GENRE),
+
+  details: (id) => methods.get(`discover/movie?with_genres=${id}`),
 };
 
 const requests = {
