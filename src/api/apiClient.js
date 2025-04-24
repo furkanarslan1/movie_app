@@ -24,6 +24,8 @@ const movie = {
   upcoming: () => methods.get(`movie/upcoming`),
 
   discover: () => methods.get(`discover/movie`),
+  video: () => methods.get(`movie/1353117/videos?language=en-US`),
+  tv: () => methods.get(`trending/tv/day?language=en-US`),
 };
 
 const requests = {

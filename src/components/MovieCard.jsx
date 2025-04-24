@@ -7,7 +7,7 @@ import { FaStar } from "react-icons/fa";
 export default function MovieCard({ movie }) {
   const { id, title, poster_path, vote_average, release_date } = movie;
 
-  const year = new Date(release_date).getFullYear();
+  const year = release_date ? new Date(release_date).getFullYear() : "";
   return (
     <Link
       to={`/movieDetails/${id}`}

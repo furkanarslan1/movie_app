@@ -41,6 +41,20 @@ export const getDiscoverMovies = createAsyncThunk(
   }
 );
 
+export const getTv = createAsyncThunk("movies/fetchTV", async () => {
+  const response = await requests.movie.tv();
+  console.log("tv");
+
+  return response.results;
+});
+
+export const getVideo = createAsyncThunk("movies/fetchVideo", async () => {
+  const response = await requests.movie.video();
+  console.log("video");
+
+  return response.results;
+});
+
 export const movieCategorySlice = createSlice({
   name: "movieCategory",
   initialState: {
@@ -48,6 +62,8 @@ export const movieCategorySlice = createSlice({
     topRated: [],
     upcoming: [],
     discover: [],
+    video: [],
+    tv: [],
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -62,6 +78,12 @@ export const movieCategorySlice = createSlice({
     });
     builder.addCase(getDiscoverMovies.fulfilled, (state, action) => {
       state.discover = action.payload;
+    });
+    builder.addCase(getVideo.fulfilled, (state, action) => {
+      state.video = action.payload;
+    });
+    builder.addCase(getTv.fulfilled, (state, action) => {
+      state.tv = action.payload;
     });
   },
 });
