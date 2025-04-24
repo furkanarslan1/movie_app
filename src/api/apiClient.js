@@ -19,6 +19,11 @@ const genres = {
 
 const movie = {
   detail: (id) => methods.get(`movie/${id}`),
+  popular: () => methods.get(`movie/popular`),
+  topRated: () => methods.get(`movie/top_rated`),
+  upcoming: () => methods.get(`movie/upcoming`),
+
+  discover: () => methods.get(`discover/movie`),
 };
 
 const requests = {
