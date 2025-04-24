@@ -5,13 +5,12 @@ import { FaPlay } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 
 export default function MovieCard({ movie }) {
-  const { id, title, poster_path, vote_average, release_date, overview } =
-    movie;
+  const { id, title, poster_path, vote_average, release_date } = movie;
 
   const year = new Date(release_date).getFullYear();
   return (
     <Link
-      to="/"
+      to={`/movieDetails/${id}`}
       className="group relative overflow-hidden hover:cursor-pointer"
     >
       <div className="max-h-[400px] max-w-[400px]">
@@ -33,13 +32,13 @@ export default function MovieCard({ movie }) {
             </div>
           </div>
           <div className="flex items-center justify-between gap-4 opacity-0 group-hover:opacity-100">
-            <Link className="group-hover:mb-8 duration-500 hover:text-red-600 text-xl">
+            <button className="group-hover:mb-8 duration-500 hover:text-red-600 text-xl">
               <FaPlay />
-            </Link>
+            </button>
 
-            <Link className="group-hover:mb-8 duration-500  hover:text-red-600 text-xl">
+            <button className="group-hover:mb-8 duration-500  hover:text-red-600 text-xl">
               <FaPlus />
-            </Link>
+            </button>
           </div>
         </div>
       </div>

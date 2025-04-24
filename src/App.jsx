@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 
 import Categories from "./pages/Categories";
 import CategoryDetails from "./pages/CategoryDetails";
+import MovieDetail from "./pages/MovieDetail";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
           { path: ":id", element: <CategoryDetails /> },
         ],
       },
+      { path: "/movieDetails/:id", element: <MovieDetail /> },
     ],
   },
 ]);

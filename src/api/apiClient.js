@@ -17,8 +17,13 @@ const genres = {
   details: (id) => methods.get(`discover/movie?with_genres=${id}`),
 };
 
+const movie = {
+  detail: (id) => methods.get(`movie/${id}`),
+};
+
 const requests = {
   genres,
+  movie,
 };
 
 export default requests;
