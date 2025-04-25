@@ -11,6 +11,10 @@ export default function Navbar() {
   useEffect(() => {
     dispatch(getGenre());
   }, []);
+
+  const watchListCounter = useSelector(
+    (store) => store.watchList.watchLists.length
+  );
   return (
     <div className="px-6 py-5 bg-black text-white flex items-center justify-between ">
       <div className="flex items-center hover:cursor-pointer gap-12 ">
@@ -59,7 +63,16 @@ export default function Navbar() {
           to="/watch-list"
           className="font-extrabold hover:cursor-pointer hover:bg-red-600 p-2 rounded-2xl  transition duration-500 hidden md:block"
         >
-          Watchlist{" "}
+          <div className="relative ">
+            <p>Watchlist</p>
+            {watchListCounter === 0 ? (
+              ""
+            ) : (
+              <span className="absolute -top-5 -right-8 bg-red-600 px-2   rounded-full">
+                {watchListCounter}
+              </span>
+            )}
+          </div>
         </Link>
         <div className="flex items-center divide-x-4 hidden md:block">
           <Link to="/sign-up" className="pe-4 hover:cursor-pointer">

@@ -1,9 +1,15 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { getMovieDetails } from "../redux/slices/movieDetailSlice";
 import { FaStar } from "react-icons/fa";
 import { IoAddCircle } from "react-icons/io5";
+import { FaMinusCircle } from "react-icons/fa";
+import { IoMdArrowRoundBack } from "react-icons/io";
+import {
+  addToWatchList,
+  removeFromWatchList,
+} from "../redux/slices/watchListSlice";
 
 export default function MovieDetail() {
   const { id } = useParams();
@@ -25,6 +31,30 @@ export default function MovieDetail() {
   } = movieDetail;
 
   const year = release_date ? new Date(release_date).getFullYear() : "Unknown";
+
+  const handleAddWatch = () => {
+    const payload = {
+      id,
+      title,
+      poster_path,
+      vote_average,
+      year,
+    };
+    dispatch(addToWatchList(payload));
+  };
+
+  const handleRemoveWatch = () => {
+    const payload = {
+      id,
+    };
+    dispatch(removeFromWatchList(payload));
+  };
+
+  const isWatchList = useSelector((store) =>
+    store.watchList.watchLists?.some((movie) => movie.id === id)
+  );
+
+  const navigate = useNavigate();
   return (
     <div
       style={{
@@ -74,11 +104,24 @@ export default function MovieDetail() {
           </div>
           <div className="flex items-center gap-4  lg:gap-4 ">
             <p className="font-extrabold">Add Watching List </p>
-            <button className="hover:cursor-pointer hover:text-red-600 duration-300">
-              <IoAddCircle className=" text-2xl lg:text-4xl" />
+            <button
+              className="hover:cursor-pointer hover:text-red-600 duration-300"
+              onClick={isWatchList ? handleRemoveWatch : handleAddWatch}
+            >
+              {isWatchList ? (
+                <FaMinusCircle className=" text-2xl lg:text-4xl" />
+              ) : (
+                <IoAddCircle className=" text-2xl lg:text-4xl" />
+              )}
             </button>
           </div>
         </div>
+        <button
+          onClick={() => navigate(-1)}
+          className="font-bold lg:text-7xl text-white absolute text-3xl top-2 right-3 lg:top-10 lg:right-15 hover:cursor-pointer"
+        >
+          X
+        </button>
       </div>
     </div>
   );

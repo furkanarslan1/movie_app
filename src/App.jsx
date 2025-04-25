@@ -7,6 +7,7 @@ import CategoryDetails from "./pages/CategoryDetails";
 import MovieDetail from "./pages/MovieDetail";
 import TVshows from "./pages/TVshows";
 import Movies from "./pages/Movies";
+import WatchList from "./pages/WatchList";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
       { path: "/movieDetails/:id", element: <MovieDetail /> },
       { path: "/tv-shows", element: <TVshows /> },
       { path: "/movies", element: <Movies /> },
+      { path: "/watch-list", element: <WatchList /> },
     ],
   },
 ]);
