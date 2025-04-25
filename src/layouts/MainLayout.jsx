@@ -10,10 +10,10 @@ export default function MainLayout() {
         <Navbar />
       </nav>
 
-      <main className="pb-14">
+      <main className="">
         <Outlet />
       </main>
-      <nav className="fixed bottom-0 left-0 w-full z-50 h-[56px] ">
+      <nav className="fixed bottom-0 left-0 w-full z-50 h-[56px] block lg:hidden md:hidden">
         <MobileNavbar />
       </nav>
     </>
