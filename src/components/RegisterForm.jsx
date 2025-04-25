@@ -1,9 +1,22 @@
 import React from "react";
 import { useFormik } from "formik";
 import { registerFormSchemas } from "./RegisterFromSchemas";
+import { useDispatch, useSelector } from "react-redux";
+import { addToUsers } from "../redux/slices/registerSlice";
 
 export default function RegisterForm() {
+  const dispatch = useDispatch();
+  const users = useSelector((store) => store.register.userList);
+
   const clgSubmit = (values, actions) => {
+    const isUsernameTaken = users.some(
+      (user) => user.username === values.username
+    );
+    if (isUsernameTaken) {
+      alert("This username is already in use.");
+      return;
+    }
+    dispatch(addToUsers(values));
     console.log(values);
     actions.resetForm();
   };
@@ -17,6 +30,7 @@ export default function RegisterForm() {
         password: "",
         confirmPassword: "",
         term: "",
+        username: "",
       },
       validationSchema: registerFormSchemas,
       onSubmit: clgSubmit,
@@ -25,6 +39,24 @@ export default function RegisterForm() {
   return (
     <div className="text-white w-full">
       <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="flex flex-col">
+          <label htmlFor="username" className="font-semibold text-sm">
+            Username
+          </label>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            value={values.username}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            className="bg-white/20 text-white p-2 rounded-md outline-none backdrop-blur placeholder:text-white/70"
+            placeholder="Enter your username"
+          />
+          {errors.username && touched.username && (
+            <p className="text-red-400 text-sm">{errors.username}</p>
+          )}
+        </div>
         <div className="flex flex-col">
           <label htmlFor="name" className="font-semibold text-sm">
             Name

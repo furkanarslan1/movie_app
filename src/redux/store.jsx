@@ -4,6 +4,7 @@ import { movieDetailSlice } from "./slices/movieDetailSlice";
 import { movieCategorySlice } from "./slices/movieCategorySlice";
 import { tvShowsSlice } from "./slices/tvShowsSlice";
 import { watchListSlice } from "./slices/watchListSlice";
+import { registerSlice } from "./slices/registerSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
     movieCategory: movieCategorySlice.reducer,
     tvShows: tvShowsSlice.reducer,
     watchList: watchListSlice.reducer,
+    register: registerSlice.reducer,
   },
 });

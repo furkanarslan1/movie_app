@@ -9,6 +9,10 @@ export const registerFormSchemas = yup.object().shape({
     .string()
     .min(2, "Name must be at least 2 characters")
     .required("Name is required"),
+  username: yup
+    .string()
+    .min(2, "Name must be at least 2 characters")
+    .required("Name is required"),
   surname: yup
     .string()
     .min(2, "Surname must be at least 2 characters")
