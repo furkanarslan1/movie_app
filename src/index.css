@@ -22,3 +22,10 @@
   -ms-overflow-style: none; /* IE ve Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}

@@ -20,7 +20,7 @@ export default function CategoryDetails() {
       <div className="text-4xl p-4 ms-8 bg-red-600 max-w-75 text-center font-extrabold rounded-xl ">
         {name}
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6  gap-4 px-4 pt-6">
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-6 gap-4 px-4 pt-6">
         {genreDetailList &&
           genreDetailList.map((movie) => (
             <MovieCard key={movie.id} movie={movie} />

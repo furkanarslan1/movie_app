@@ -132,13 +132,13 @@ export default function CategorySection({ title, type }) {
 
         <button
           onClick={scrollLeft}
-          className="absolute left-5 top-1/2 transform -translate-y-1/2 z-10  text-6xl bg-opacity-50 hover:cursor-pointer"
+          className="absolute left-5 top-1/2 transform -translate-y-1/2 z-10  text-6xl bg-opacity-50 hover:cursor-pointer  hidden md:block lg:block"
         >
           <FaChevronLeft />
         </button>
         <button
           onClick={scrollRight}
-          className="absolute right-5 top-1/2 transform -translate-y-1/2  text-6xl z-10 bg-opacity-50 hover:cursor-pointer"
+          className="absolute right-5 top-1/2 transform -translate-y-1/2  text-6xl z-10 bg-opacity-50 hover:cursor-pointer hidden md:block lg:block"
         >
           <FaChevronRight />
         </button>
@@ -147,7 +147,7 @@ export default function CategorySection({ title, type }) {
           className="flex gap-4 overflow-x-auto no-scrollbar"
         >
           {movies.map((movie) => (
-            <div key={movie.id} className="flex-shrink-0 w-52">
+            <div key={movie.id} className="flex-shrink-0  w-30 lg:w-52">
               <MovieCard movie={movie} />
             </div>
           ))}

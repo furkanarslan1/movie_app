@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addToWatchList,
   removeFromWatchList,
-} from "../redux/slices/watchListSlice";
+} from "../redux/slices/watchListSlice"; // örnek
 
 export default function MovieCard({ movie }) {
   const { id, title, poster_path, vote_average, release_date } = movie;
@@ -41,7 +41,7 @@ export default function MovieCard({ movie }) {
       </Link>
 
       <div className="absolute bottom-0 px-6 w-full bg-gradient-to-b from-transparent to-black uppercase">
-        <h3 className="group-hover:mb-6 duration-500 font-extrabold">
+        <h3 className="group-hover:mb-6 duration-500 font-extrabold hidden md:block ">
           {title}
         </h3>
 

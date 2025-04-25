@@ -1,6 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router";
 import Navbar from "../components/Navbar";
+import MobileNavbar from "../components/MobileNavbar";
 
 export default function MainLayout() {
   return (
@@ -9,9 +10,12 @@ export default function MainLayout() {
         <Navbar />
       </nav>
 
-      <main>
+      <main className="pb-14">
         <Outlet />
       </main>
+      <nav className="fixed bottom-0 left-0 w-full z-50 h-[56px] ">
+        <MobileNavbar />
+      </nav>
     </>
   );
 }
