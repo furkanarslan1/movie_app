@@ -28,9 +28,13 @@ const movie = {
   tv: () => methods.get(`trending/tv/day?language=en-US`),
 };
 
+const tvShows = {
+  discoverTV: () => methods.get(`discover/tv`),
+};
 const requests = {
   genres,
   movie,
+  tvShows,
 };
 
 export default requests;

@@ -17,6 +17,7 @@ export default function MovieCard({ movie }) {
         <img
           src={`https://image.tmdb.org/t/p/original/${poster_path}`}
           alt={title}
+          loading="lazy"
           className="w-fıll h-full object-cover rounded-md group-hover:scale-110 group-hover:opacity-50 duration-500"
         />
 
