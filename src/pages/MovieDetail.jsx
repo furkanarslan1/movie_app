@@ -1,15 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { getMovieDetails } from "../redux/slices/movieDetailSlice";
-import { FaStar } from "react-icons/fa";
+import { FaStar, FaPlay } from "react-icons/fa";
 import { IoAddCircle } from "react-icons/io5";
 import { FaMinusCircle } from "react-icons/fa";
-import { IoMdArrowRoundBack } from "react-icons/io";
+
 import {
   addToWatchList,
   removeFromWatchList,
 } from "../redux/slices/watchListSlice";
+import VideoModal from "../components/VideoModal";
+import { getVideoForModal } from "../redux/slices/videoModalSlice";
 
 export default function MovieDetail() {
   const { id } = useParams();
@@ -55,6 +57,25 @@ export default function MovieDetail() {
   );
 
   const navigate = useNavigate();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [videoKey, setVideoKey] = useState(null);
+
+  const { videoModalList } = useSelector((store) => store.videoModal);
+
+  const handlePlay = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    dispatch(getVideoForModal(id))
+      .unwrap()
+      .then(() => {
+        setIsModalOpen(true);
+      })
+      .catch((error) => {
+        console.log("Failed Video", error);
+      });
+  };
   return (
     <div
       style={{
@@ -70,12 +91,20 @@ export default function MovieDetail() {
             {title}
           </h1>
 
-          <div className="max-w-[350px] w-60 lg:w-100">
+          <div className="max-w-[350px] w-60 lg:w-100 relative">
             <img
               src={`https://image.tmdb.org/t/p/original/${poster_path}`}
               alt={title}
               className="w-full h-full object-cover rounded-md "
             />
+            <div>
+              <button
+                className="duration-500 hover:text-red-600 text-8xl hover:cursor-pointer absolute top-30 left-10 lg:top-50 lg:left-25 text-red-600 bg-white px-4 rounded-full py-4 ps-8"
+                onClick={handlePlay}
+              >
+                <FaPlay />
+              </button>
+            </div>
           </div>
         </div>
         <div className=" flex flex-col gap-4 pb-2 lg:gap-8 lg:pt-15 ">
@@ -123,6 +152,11 @@ export default function MovieDetail() {
           X
         </button>
       </div>
+      <VideoModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        videoKey={videoModalList?.results?.[0]?.key}
+      />
     </div>
   );
 }

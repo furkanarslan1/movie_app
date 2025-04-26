@@ -73,10 +73,15 @@ const movie = {
 const tvShows = {
   discoverTV: () => methods.get(`discover/tv`),
 };
+
+const videoModal = {
+  videos: (id) => methods.get(`movie/${id}/videos?language=en-US`),
+};
 const requests = {
   genres,
   movie,
   tvShows,
+  videoModal,
 };
 
 export default requests;

@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaPlus, FaPlay, FaStar, FaMinusCircle } from "react-icons/fa";
 import { Link } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToWatchList,
   removeFromWatchList,
-} from "../redux/slices/watchListSlice"; // örnek
+} from "../redux/slices/watchListSlice";
+
+import VideoModal from "./VideoModal";
+import { getVideoForModal } from "../redux/slices/videoModalSlice";
 
 export default function MovieCard({ movie }) {
   const { id, title, poster_path, vote_average, release_date } = movie;
@@ -29,6 +32,24 @@ export default function MovieCard({ movie }) {
     store.watchList.watchLists?.some((movie) => movie.id === id)
   );
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [videoKey, setVideoKey] = useState(null);
+
+  const { videoModalList } = useSelector((store) => store.videoModal);
+
+  const handlePlay = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    dispatch(getVideoForModal(id))
+      .unwrap()
+      .then(() => {
+        setIsModalOpen(true);
+      })
+      .catch((error) => {
+        console.log("Failed Video", error);
+      });
+  };
   return (
     <div className="group relative overflow-hidden hover:cursor-pointer max-w-[400px]">
       <Link to={`/movieDetails/${id}`}>
@@ -54,7 +75,10 @@ export default function MovieCard({ movie }) {
         </div>
 
         <div className="flex items-center justify-between gap-4 opacity-0 group-hover:opacity-100">
-          <button className="group-hover:mb-8 duration-500 hover:text-red-600 text-xl hover:cursor-pointer">
+          <button
+            className="group-hover:mb-8 duration-500 hover:text-red-600 text-xl hover:cursor-pointer"
+            onClick={handlePlay}
+          >
             <FaPlay />
           </button>
 
@@ -68,6 +92,12 @@ export default function MovieCard({ movie }) {
           </button>
         </div>
       </div>
+
+      <VideoModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        videoKey={videoModalList?.results?.[0]?.key}
+      />
     </div>
   );
 }
