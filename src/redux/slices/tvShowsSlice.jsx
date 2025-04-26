@@ -1,20 +1,33 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import requests from "../../api/apiClient";
+import { toast } from "react-toastify";
 
-export const getDiscoverTV = createAsyncThunk("fetch/DiscoverTV", async () => {
-  const response = await requests.tvShows.discoverTV();
-  return response.results;
-});
+export const getDiscoverTV = createAsyncThunk(
+  "fetch/DiscoverTV",
+  async (_, thunkAPI) => {
+    try {
+      const response = await requests.tvShows.discoverTV();
+      return response.results;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
 
 export const tvShowsSlice = createSlice({
   name: "tvShows",
   initialState: {
     tvDiscovery: [],
+    error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getDiscoverTV.fulfilled, (state, action) => {
       state.tvDiscovery = action.payload;
+    });
+    builder.addCase(getDiscoverTV.rejected, (state, action) => {
+      state.error = action.payload;
+      toast.error("Failed getDiscoverTV");
     });
   },
 });

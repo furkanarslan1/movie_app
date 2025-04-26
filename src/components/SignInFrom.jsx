@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { singInrFormSchemas } from "./RegisterFromSchemas";
 import { userEnter } from "../redux/slices/registerSlice";
 import { Link, useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 export default function SignInFrom() {
   const dispatch = useDispatch();
@@ -16,7 +17,10 @@ export default function SignInFrom() {
     );
 
     if (!isValid) {
-      alert("invalid username or password");
+      toast.error("invalid username or password");
+      actions.setSubmitting(false);
+
+      // alert("invalid username or password");
       return;
     }
     dispatch(userEnter(values));

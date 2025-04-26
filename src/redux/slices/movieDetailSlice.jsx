@@ -1,18 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import requests from "../../api/apiClient";
+import { toast } from "react-toastify";
 
 const initialState = {
   movieDetail: [],
+  error: null,
 };
 
 export const getMovieDetails = createAsyncThunk(
   "getMovieDetails",
-  async (id) => {
+  async (id, thunkAPI) => {
     try {
       const response = await requests.movie.detail(id);
       return response;
     } catch (error) {
-      console.log(error);
+      return thunkAPI.rejectWithValue(error.message);
     } finally {
     }
   }
@@ -25,6 +27,10 @@ export const movieDetailSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getMovieDetails.fulfilled, (state, action) => {
       state.movieDetail = action.payload;
+    });
+    builder.addCase(getMovieDetails.rejected, (state, action) => {
+      state.error = action.payload;
+      toast.error("Failed getMovieDetails");
     });
   },
 });

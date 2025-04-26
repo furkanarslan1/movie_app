@@ -2,6 +2,7 @@ import React from "react";
 import { Outlet } from "react-router";
 import Navbar from "../components/Navbar";
 import MobileNavbar from "../components/MobileNavbar";
+import { ToastContainer } from "react-toastify";
 
 export default function MainLayout() {
   return (
@@ -9,6 +10,13 @@ export default function MainLayout() {
       <nav>
         <Navbar />
       </nav>
+      <ToastContainer
+        position="bottom-right"
+        theme="colored"
+        autoClose={2000}
+        closeOnClick
+        draggable
+      />
 
       <main className="">
         <Outlet />

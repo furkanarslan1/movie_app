@@ -4,6 +4,7 @@ import { registerFormSchemas } from "./RegisterFromSchemas";
 import { useDispatch, useSelector } from "react-redux";
 import { addToUsers } from "../redux/slices/registerSlice";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 export default function RegisterForm() {
   const dispatch = useDispatch();
@@ -15,13 +16,20 @@ export default function RegisterForm() {
       (user) => user.username === values.username
     );
     if (isUsernameTaken) {
-      alert("This username is already in use.");
+      toast.error("This username is already in use.");
+      actions.setSubmitting(false);
+      // alert("This username is already in use.");
       return;
     }
     dispatch(addToUsers(values));
     console.log(values);
     actions.resetForm();
-    navigate("/sign-in");
+    toast.success("Registered successfully! Redirecting to Sign-In...", {
+      autoClose: 2000,
+    });
+    setTimeout(() => {
+      navigate("/sign-in");
+    }, 2000);
   };
 
   const { values, handleChange, handleSubmit, errors, touched, handleBlur } =
@@ -175,7 +183,7 @@ export default function RegisterForm() {
 
         <button
           type="submit"
-          className="w-full bg-white text-red-600 font-bold text-lg py-2 rounded-lg hover:bg-black hover:text-white transition duration-300"
+          className="w-full bg-white text-red-600 font-bold text-lg py-2 rounded-lg hover:bg-black hover:text-white transition duration-300 hover:cursor-pointer"
         >
           Submit
         </button>
