@@ -3,10 +3,12 @@ import { useFormik } from "formik";
 import { registerFormSchemas } from "./RegisterFromSchemas";
 import { useDispatch, useSelector } from "react-redux";
 import { addToUsers } from "../redux/slices/registerSlice";
+import { useNavigate } from "react-router";
 
 export default function RegisterForm() {
   const dispatch = useDispatch();
   const users = useSelector((store) => store.register.userList);
+  const navigate = useNavigate();
 
   const clgSubmit = (values, actions) => {
     const isUsernameTaken = users.some(
@@ -19,6 +21,7 @@ export default function RegisterForm() {
     dispatch(addToUsers(values));
     console.log(values);
     actions.resetForm();
+    navigate("/sign-in");
   };
 
   const { values, handleChange, handleSubmit, errors, touched, handleBlur } =

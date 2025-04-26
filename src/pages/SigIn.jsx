@@ -1,8 +1,7 @@
 import React from "react";
-import RegisterForm from "../components/RegisterForm";
-import { Link } from "react-router";
+import SignInFrom from "../components/SignInFrom";
 
-export default function SignUp() {
+export default function SignIn() {
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 bg-cover bg-center"></div>
@@ -11,7 +10,7 @@ export default function SignUp() {
 
       <div className="relative z-10 w-full max-w-md p-4 sm:p-8">
         <div className="bg-white/10 backdrop-blur-2xl rounded-2xl p-6 sm:p-8 shadow-xl">
-          <RegisterForm />
+          <SignInFrom />
         </div>
       </div>
     </div>

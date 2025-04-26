@@ -12,6 +12,8 @@ export default function Navbar() {
     dispatch(getGenre());
   }, []);
 
+  const user = useSelector((store) => store.register.userValid);
+
   const watchListCounter = useSelector(
     (store) => store.watchList.watchLists.length
   );
@@ -74,14 +76,30 @@ export default function Navbar() {
             )}
           </div>
         </Link>
-        <div className="flex items-center divide-x-4 hidden md:block">
-          <Link to="/sign-up" className="pe-4 hover:cursor-pointer">
-            Sign Up
+
+        {user ? (
+          <Link to="user" className="flex flex-col items-center xs:hidden ">
+            <div>
+              <img
+                src="https://i.pravatar.cc/40"
+                alt=""
+                className="rounded-full hidden md:block"
+              />
+            </div>
+            <p className="font-bold text-white hidden md:block text-xs">
+              {user.username}
+            </p>
           </Link>
-          <Link to="/sign-in" className="ps-4 hover:cursor-pointer">
-            Sign in
-          </Link>
-        </div>
+        ) : (
+          <div className="flex items-center divide-x-4 hidden md:block">
+            <Link to="/sign-up" className="pe-4 hover:cursor-pointer">
+              Sign Up
+            </Link>
+            <Link to="/sign-in" className="ps-4 hover:cursor-pointer">
+              Sign in
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

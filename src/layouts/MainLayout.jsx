@@ -13,7 +13,7 @@ export default function MainLayout() {
       <main className="">
         <Outlet />
       </main>
-      <nav className="fixed bottom-0 left-0 w-full z-50 h-[56px] block lg:hidden md:hidden">
+      <nav className="fixed bottom-0 left-0 w-full z-50 h-[56px] sm:block lg:hidden md:hidden">
         <MobileNavbar />
       </nav>
     </>

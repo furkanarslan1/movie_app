@@ -5,6 +5,7 @@ export const registerSlice = createSlice({
   name: "register",
   initialState: {
     userList: getItem("users", []),
+    userValid: getItem("userValid", []),
   },
   reducers: {
     addToUsers: (state, action) => {
@@ -16,9 +17,20 @@ export const registerSlice = createSlice({
         setItem("users", state.userList);
       }
     },
+    userEnter: (state, action) => {
+      const isUser = state.userList.find(
+        (user) =>
+          user.username === action.payload.username &&
+          user.password === action.payload.password
+      );
+      if (isUser) {
+        state.userValid = isUser;
+        setItem("userValid", isUser);
+      }
+    },
   },
 });
 
-export const { addToUsers } = registerSlice.actions;
+export const { addToUsers, userEnter } = registerSlice.actions;
 
 export default registerSlice.reducer;

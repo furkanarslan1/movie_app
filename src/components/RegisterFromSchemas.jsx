@@ -32,3 +32,17 @@ export const registerFormSchemas = yup.object().shape({
     .oneOf([yup.ref("password", yup.password), "Password isn't same"]),
   term: yup.boolean().oneOf([true], "You must accept the terms and conditions"),
 });
+
+export const singInrFormSchemas = yup.object().shape({
+  username: yup
+    .string()
+    .min(2, "Name must be at least 2 characters")
+    .required("Name is required"),
+
+  password: yup
+    .string()
+    .min(6, "Password must be at least 6 characters")
+    .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .matches(/[0-9]/, "Password must contain at least one number")
+    .required("Password is required"),
+});
