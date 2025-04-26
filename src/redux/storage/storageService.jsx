@@ -1,4 +1,4 @@
-export const getItem = (key, defaultValue = []) => {
+export const getItem = (key, defaultValue = [] || null) => {
   try {
     const storedItems = localStorage.getItem(key);
     return storedItems ? JSON.parse(storedItems) : defaultValue;

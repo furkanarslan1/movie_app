@@ -5,7 +5,7 @@ export const registerSlice = createSlice({
   name: "register",
   initialState: {
     userList: getItem("users", []),
-    userValid: getItem("userValid", []),
+    userValid: getItem("userValid", null),
   },
   reducers: {
     addToUsers: (state, action) => {
@@ -28,9 +28,13 @@ export const registerSlice = createSlice({
         setItem("userValid", isUser);
       }
     },
+    logout: (state, action) => {
+      state.userValid = null;
+      setItem("userValid", null);
+    },
   },
 });
 
-export const { addToUsers, userEnter } = registerSlice.actions;
+export const { addToUsers, userEnter, logout } = registerSlice.actions;
 
 export default registerSlice.reducer;

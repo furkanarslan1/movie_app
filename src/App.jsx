@@ -10,6 +10,7 @@ import Movies from "./pages/Movies";
 import WatchList from "./pages/WatchList";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SigIn";
+import User from "./pages/User";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,7 @@ const router = createBrowserRouter([
       { path: "/watch-list", element: <WatchList /> },
       { path: "/sign-up", element: <SignUp /> },
       { path: "/sign-in", element: <SignIn /> },
+      { path: "/user", element: <User /> },
     ],
   },
 ]);
