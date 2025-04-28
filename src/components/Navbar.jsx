@@ -4,15 +4,19 @@ import { NavLink, Link } from "react-router";
 import { BiSolidCategory } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { getGenre } from "../redux/slices/genreSlice";
+import { loadWatchList } from "../redux/slices/watchListSlice";
 
 export default function Navbar() {
   const { genreList } = useSelector((store) => store.genres);
+  const user = useSelector((store) => store.register.userValid);
+
   const dispatch = useDispatch();
   useEffect(() => {
+    if (user) {
+      dispatch(loadWatchList());
+    }
     dispatch(getGenre());
-  }, []);
-
-  const user = useSelector((store) => store.register.userValid);
+  }, [user, dispatch]);
 
   const watchListCounter = useSelector(
     (store) => store.watchList.watchLists.length

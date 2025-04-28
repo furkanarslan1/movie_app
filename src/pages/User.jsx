@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router";
 import { logout } from "../redux/slices/registerSlice";
+import { loadWatchList } from "../redux/slices/watchListSlice";
 
 export default function User() {
   const user = useSelector((store) => store.register.userValid);
@@ -11,6 +12,7 @@ export default function User() {
   const handleLogout = () => {
     dispatch(logout());
     navigate("/home");
+    dispatch(loadWatchList());
   };
 
   if (!user) {
