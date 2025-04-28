@@ -26,7 +26,7 @@ export default function WatchList() {
           </div>
         </div>
       ) : (
-        <div className="text-center pt-20 flex flex-col gap-8 items-center">
+        <div className="text-center pt-20 flex flex-col gap-8 items-center min-h-screen ">
           <h1 className=" text-3xl  lg:text-5xl">You have to Sign In</h1>
 
           <Link

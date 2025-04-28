@@ -139,7 +139,7 @@ export default function MovieDetail() {
               </button>
             </div>
             <button
-              className="flex items-center gap-4 bg-white rounded-2xl w-30 text-black px-2 hover:cursor-pointer"
+              className="flex items-center justify-center gap-0 bg-white rounded-2xl w-35 text-black px-2 hover:cursor-pointer "
               onClick={handlePlay}
             >
               <button
