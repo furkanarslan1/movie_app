@@ -29,7 +29,8 @@ export const registerFormSchemas = yup.object().shape({
     .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
     .matches(/[0-9]/, "Password must contain at least one number")
     .required("Confirm Password is required")
-    .oneOf([yup.ref("password", yup.password), "Password isn't same"]),
+    .oneOf([yup.ref("password"), "Passwords don't match"]),
+
   term: yup.boolean().oneOf([true], "You must accept the terms and conditions"),
 });
 
