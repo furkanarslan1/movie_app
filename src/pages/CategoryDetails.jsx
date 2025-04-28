@@ -3,10 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { getGenreDetails } from "../redux/slices/genreSlice";
 import MovieCard from "../components/MovieCard";
+import Loading from "../components/Loading";
 
 export default function CategoryDetails() {
   const { id } = useParams();
-  const { genreDetailList, genreList } = useSelector((store) => store.genres);
+  const { genreDetailList, genreList, status } = useSelector(
+    (store) => store.genres
+  );
   const dispatch = useDispatch();
   const currentGenre = genreList.find((genre) => genre.id === Number(id));
   const name = currentGenre?.name || "Category";
@@ -16,10 +19,12 @@ export default function CategoryDetails() {
   }, [dispatch, id]);
 
   return (
-    <div className="bg-black text-white">
+    <div className="bg-black text-white min-h-screen relavite">
+      {status === "pending" && <Loading />}
       <div className="text-4xl p-4 ms-8 bg-red-600 max-w-75 text-center font-extrabold rounded-xl ">
         {name}
       </div>
+
       <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-6 gap-4 px-4 pt-6">
         {genreDetailList &&
           genreDetailList.map((movie) => (

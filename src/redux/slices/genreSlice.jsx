@@ -7,6 +7,7 @@ const initialState = {
   genreList: [],
   genreDetailList: [],
   error: null,
+  status: "idle",
 };
 
 export const getGenre = createAsyncThunk("getGenre", async (_, thunkAPI) => {
@@ -37,19 +38,29 @@ export const genreSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(getGenre.pending, (state) => {
+      state.status = "pending";
+    });
     builder.addCase(getGenre.fulfilled, (state, action) => {
+      state.status = "idle";
       console.log("Gelen veri:", action.payload);
       state.genreList = action.payload;
     });
     builder.addCase(getGenre.rejected, (state, action) => {
+      state.status = "idle";
       state.error = action.payload;
       toast.error("Genre list could not be loaded!");
     });
+    builder.addCase(getGenreDetails.pending, (state) => {
+      state.status = "pending";
+    });
     builder.addCase(getGenreDetails.fulfilled, (state, action) => {
+      state.status = "idle";
       console.log("gelen details", action.payload);
       state.genreDetailList = action.payload;
     });
     builder.addCase(getGenreDetails.rejected, (state, action) => {
+      state.status = "idle";
       state.error = action.payload;
       toast.error("Genre details could not be loaded!");
     });

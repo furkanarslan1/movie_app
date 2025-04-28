@@ -9,6 +9,7 @@ import {
 
 import VideoModal from "./VideoModal";
 import { getVideoForModal } from "../redux/slices/videoModalSlice";
+import Loading from "./Loading";
 
 export default function MovieCard({ movie }) {
   const { id, title, poster_path, vote_average, release_date } = movie;
@@ -33,7 +34,7 @@ export default function MovieCard({ movie }) {
   );
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [videoKey, setVideoKey] = useState(null);
+  const [imageLoading, setImageLoading] = useState(true);
 
   const { videoModalList } = useSelector((store) => store.videoModal);
 
@@ -57,9 +58,11 @@ export default function MovieCard({ movie }) {
           src={`https://image.tmdb.org/t/p/original/${poster_path}`}
           alt={title}
           loading="lazy"
+          onLoad={() => setImageLoading(false)}
           className="w-full h-full object-cover rounded-md group-hover:scale-110 group-hover:opacity-50 duration-500"
         />
       </Link>
+      {imageLoading && <Loading />}
 
       <div className="absolute bottom-0 px-6 w-full bg-gradient-to-b from-transparent to-black uppercase">
         <h3 className="group-hover:mb-6 duration-500 font-extrabold hidden md:block ">

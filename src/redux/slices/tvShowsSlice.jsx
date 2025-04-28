@@ -19,13 +19,21 @@ export const tvShowsSlice = createSlice({
   initialState: {
     tvDiscovery: [],
     error: null,
+    status: "idle",
   },
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(getDiscoverTV.pending, (state, action) => {
+      state.status = "pending";
+    });
     builder.addCase(getDiscoverTV.fulfilled, (state, action) => {
+      state.status = "idle";
+
       state.tvDiscovery = action.payload;
     });
     builder.addCase(getDiscoverTV.rejected, (state, action) => {
+      state.status = "idle";
+
       state.error = action.payload;
       toast.error("Failed getDiscoverTV");
     });

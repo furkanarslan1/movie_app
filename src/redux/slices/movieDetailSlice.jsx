@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 const initialState = {
   movieDetail: [],
   error: null,
+  status: "idle",
 };
 
 export const getMovieDetails = createAsyncThunk(
@@ -25,10 +26,17 @@ export const movieDetailSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(getMovieDetails.pending, (state) => {
+      state.status = "pending";
+    });
     builder.addCase(getMovieDetails.fulfilled, (state, action) => {
+      state.status = "idle";
+
       state.movieDetail = action.payload;
     });
     builder.addCase(getMovieDetails.rejected, (state, action) => {
+      state.status = "idle";
+
       state.error = action.payload;
       toast.error("Failed getMovieDetails");
     });

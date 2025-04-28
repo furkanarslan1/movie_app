@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 const initialState = {
   videoModalList: [],
   error: null,
+  status: "idle",
 };
 
 export const getVideoForModal = createAsyncThunk(
@@ -25,10 +26,17 @@ export const videoModalSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(getVideoForModal.pending, (state, action) => {
+      state.status = "pending";
+    });
     builder.addCase(getVideoForModal.fulfilled, (state, action) => {
+      state.status = "idle";
+
       state.videoModalList = action.payload;
     });
     builder.addCase(getVideoForModal.rejected, (state, action) => {
+      state.status = "idle";
+
       state.error = action.payload;
       toast.error("Failed getVideoForModal");
     });

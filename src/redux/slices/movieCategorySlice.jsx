@@ -93,48 +93,94 @@ export const movieCategorySlice = createSlice({
     video: [],
     tv: [],
     error: null,
+    status: "idle",
   },
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(getUpcomingMovies.pending, (state) => {
+      state.status = "pending";
+    });
     builder.addCase(getUpcomingMovies.fulfilled, (state, action) => {
+      state.status = "idle";
       state.upcoming = action.payload;
     });
     builder.addCase(getUpcomingMovies.rejected, (state, action) => {
+      state.status = "idle";
       state.error = action.payload;
       toast.error("Failed getUpcomingMovies");
     });
+
+    builder.addCase(getTopRatedMovies.pending, (state) => {
+      state.status = "pending";
+    });
     builder.addCase(getTopRatedMovies.fulfilled, (state, action) => {
+      state.status = "idle";
+
       state.topRated = action.payload;
     });
     builder.addCase(getTopRatedMovies.rejected, (state, action) => {
+      state.status = "idle";
+
       state.error = action.payload;
       toast.error("Failed getTopRatedMovies");
     });
+
+    builder.addCase(getPopularMovies.pending, (state) => {
+      state.status = "pending";
+    });
     builder.addCase(getPopularMovies.fulfilled, (state, action) => {
+      state.status = "idle";
+
       state.popular = action.payload;
     });
     builder.addCase(getPopularMovies.rejected, (state, action) => {
+      state.status = "idle";
+
       state.error = action.payload;
       toast.error("Failed getPopularMovies");
     });
+
+    builder.addCase(getDiscoverMovies.pending, (state) => {
+      state.status = "pending";
+    });
     builder.addCase(getDiscoverMovies.fulfilled, (state, action) => {
+      state.status = "idle";
+
       state.discover = action.payload;
     });
     builder.addCase(getDiscoverMovies.rejected, (state, action) => {
+      state.status = "idle";
+
       state.error = action.payload;
       toast.error("Failed getDiscoverMovies");
     });
+
+    builder.addCase(getVideo.pending, (state) => {
+      state.status = "pending";
+    });
     builder.addCase(getVideo.fulfilled, (state, action) => {
+      state.status = "idle";
+
       state.video = action.payload;
     });
     builder.addCase(getVideo.rejected, (state, action) => {
+      state.status = "idle";
+
       state.error = action.payload;
       toast.error("Failed getVideo");
     });
+
+    builder.addCase(getTv.pending, (state) => {
+      state.status = "pending";
+    });
     builder.addCase(getTv.fulfilled, (state, action) => {
+      state.status = "idle";
+
       state.tv = action.payload;
     });
     builder.addCase(getTv.rejected, (state, action) => {
+      state.status = "idle";
+
       state.error = action.payload;
       toast.error("Failed getTv");
     });
