@@ -81,7 +81,7 @@ export default function MovieDetail() {
       style={{
         backgroundImage: `url(https://image.tmdb.org/t/p/original/${backdrop_path})`,
       }}
-      className="min-h-screen bg-cover bg-center bg-no-repeat relative p-2 px-3 "
+      className="min-h-screen bg-cover bg-center bg-no-repeat relative p-2 px-3  pb-20 lg:pb-0"
     >
       <div className="absolute inset-0 bg-black/80"></div>
 
@@ -97,14 +97,6 @@ export default function MovieDetail() {
               alt={title}
               className="w-full h-full object-cover rounded-md "
             />
-            <div>
-              <button
-                className="duration-500 hover:text-red-600 text-8xl hover:cursor-pointer absolute top-30 left-10 lg:top-50 lg:left-25 text-red-600 bg-white px-4 rounded-full py-4 ps-8"
-                onClick={handlePlay}
-              >
-                <FaPlay />
-              </button>
-            </div>
           </div>
         </div>
         <div className=" flex flex-col gap-4 pb-2 lg:gap-8 lg:pt-15 ">
@@ -131,17 +123,32 @@ export default function MovieDetail() {
             <p className="font-extrabold">Language: </p>
             <p>{original_language}</p>
           </div>
-          <div className="flex items-center gap-4  lg:gap-4 ">
-            <p className="font-extrabold">Add Watching List </p>
+
+          <div className="flex lg:flex-col  lg:items-start justify-between">
+            <div className="flex items-center gap-4  lg:gap-4 ">
+              <p className="font-extrabold">Add Watching List </p>
+              <button
+                className="hover:cursor-pointer hover:text-red-600 duration-300"
+                onClick={isWatchList ? handleRemoveWatch : handleAddWatch}
+              >
+                {isWatchList ? (
+                  <FaMinusCircle className=" text-4xl lg:text-6xl" />
+                ) : (
+                  <IoAddCircle className=" text-4xl lg:text-6xl " />
+                )}
+              </button>
+            </div>
             <button
-              className="hover:cursor-pointer hover:text-red-600 duration-300"
-              onClick={isWatchList ? handleRemoveWatch : handleAddWatch}
+              className="flex items-center gap-4 bg-white rounded-2xl w-30 text-black px-2 hover:cursor-pointer"
+              onClick={handlePlay}
             >
-              {isWatchList ? (
-                <FaMinusCircle className=" text-2xl lg:text-4xl" />
-              ) : (
-                <IoAddCircle className=" text-2xl lg:text-4xl" />
-              )}
+              <button
+                className="duration-500 hover:text-red-600 text-2xl hover:cursor-pointer  text-red-600 bg-white p-2 rounded-full  "
+                onClick={handlePlay}
+              >
+                <FaPlay />
+              </button>
+              <p className="font-extrabold">Play</p>
             </button>
           </div>
         </div>
