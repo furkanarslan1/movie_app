@@ -10,19 +10,19 @@ A modern movie discovery app where users can explore popular films, watch traile
 
 ### Homepage
 
-![Homepage](./assets/movieAp.png)
+![Homepage](./src/assets/movieAp.png)
 
 ### Movie Detail
 
-![Movie Detail](./assets/mmovieDetail.png)
+![Movie Detail](./src/assets/movieDetail.png)
 
 ### Categories
 
-![Categories](./assets/categories.png)
+![Categories](./src/assets/categories.png)
 
 ### Watchlist
 
-![Watchlist](./assets/watchList.png)
+![Watchlist](./src/assets/watchList.png)
 
 ## 🚀 Features
 
