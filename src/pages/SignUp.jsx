@@ -1,6 +1,5 @@
 import React from "react";
 import RegisterForm from "../components/RegisterForm";
-import sign from "../assets/sign4.jpg";
 
 export default function SignUp() {
   return (

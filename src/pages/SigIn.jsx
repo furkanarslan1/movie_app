@@ -1,6 +1,5 @@
 import React from "react";
 import SignInFrom from "../components/SignInFrom";
-import sign from "../assets/sign4.jpg";
 
 export default function SignIn() {
   return (
